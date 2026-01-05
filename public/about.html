@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>About Placement</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="about.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <div id="header"></div>
+    <main class="about-container">
+      <section>
+        <h1 class="section-title">About Placement</h1>
+        <p>
+          Placement Cell interacts with the reputed organizations across PAN
+          India for arranging campus interviews for the final year students. We
+          also make efforts to organize technical seminars, workshops and
+          corporate expectation sessions. Industry personnel are invited
+          periodically to enrich the knowledge of our student community with the
+          latest technological innovations and industry practices.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="section-title">Vision</h2>
+        <p>
+          To empower students with the most relevant knowledge and skills that
+          is desired for a sustainable profession in reputed organizations.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="section-title">Mission</h2>
+        <ul class="mission-list">
+          <li>
+            To enhance the employability skills among the students to meet out
+            the corporate expectations.
+          </li>
+          <li>To improve the industry institute relationships.</li>
+          <li>
+            To place interested and eligible students in the prospective core,
+            software and management companies.
+          </li>
+          <li>
+            To enhance the students interested towards the entrepreneurship and
+            business strategies.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="section-title">Objectives</h2>
+        <ul class="objectives-list">
+          <li>
+            <i class="fa-solid fa-check"></i> To provide class training for the
+            students through continuous different training modules.
+          </li>
+          <li>
+            <i class="fa-solid fa-check"></i> To approach top multinational
+            companies for arranging the campus recruitment.
+          </li>
+          <li>
+            <i class="fa-solid fa-check"></i> To counsel the students to improve
+            their career exposure across the global.
+          </li>
+          <li>
+            <i class="fa-solid fa-check"></i> To produce the most competitive
+            students to fit in all scenario of the job market.
+          </li>
+        </ul>
+      </section>
+    </main>
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <script>
+      // Load header and footer dynamically
+      async function loadLayout() {
+        try {
+          // Load Header
+          const headerRes = await fetch("header.html");
+          const headerHTML = await headerRes.text();
+          console.log("Header HTML:", headerHTML); // log header content
+          document.getElementById("header").innerHTML = headerHTML;
+
+          // Load Footer
+          const footerRes = await fetch("footer.html");
+          const footerHTML = await footerRes.text();
+          console.log("Footer HTML:", footerHTML); // log footer content
+          document.getElementById("footer").innerHTML = footerHTML;
+
+          // Enable mobile menu toggle
+          const menuToggle = document.getElementById("menuToggle");
+          const navMenu = document.querySelector(".nav-menu");
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          // Set Dynamic Year after footer loads
+          const yearSpan = document.getElementById("year");
+          if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+          }
+        } catch (err) {
+          console.error("Error loading layout:", err);
+        }
+      }
+      loadLayout();
+    </script>
+  </body>
+</html>

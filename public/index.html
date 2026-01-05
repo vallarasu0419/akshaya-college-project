@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>About Placement</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <div id="header"></div>
+    <main class="about-container">
+      <img src="./banner.jpg" alt="College Logo" width="100%" height="100%" />
+    </main>
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <script>
+      // Load header and footer dynamically
+      async function loadLayout() {
+        try {
+          // Load Header
+          const headerRes = await fetch("header.html");
+          const headerHTML = await headerRes.text();
+          console.log("Header HTML:", headerHTML); // log header content
+          document.getElementById("header").innerHTML = headerHTML;
+
+          // Load Footer
+          const footerRes = await fetch("footer.html");
+          const footerHTML = await footerRes.text();
+          console.log("Footer HTML:", footerHTML); // log footer content
+          document.getElementById("footer").innerHTML = footerHTML;
+
+          // Enable mobile menu toggle
+          const menuToggle = document.getElementById("menuToggle");
+          const navMenu = document.querySelector(".nav-menu");
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          // Set Dynamic Year after footer loads
+          const yearSpan = document.getElementById("year");
+          if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+          }
+        } catch (err) {
+          console.error("Error loading layout:", err);
+        }
+      }
+      loadLayout();
+    </script>
+  </body>
+</html>

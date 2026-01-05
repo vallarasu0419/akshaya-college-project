@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Recruiters</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="recruiters.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <main class="recruiters-container">
+      <h1 class="section-title">Our Recruiters</h1>
+      <div class="recruiters-grid">
+        <!-- Example recruiters, replace logo1.png ... with actual company logos -->
+        <div class="card"><img src="images/logo1.png" alt="Company 1" /></div>
+        <div class="card"><img src="images/logo2.png" alt="Company 2" /></div>
+        <div class="card"><img src="images/logo3.png" alt="Company 3" /></div>
+        <div class="card"><img src="images/logo4.png" alt="Company 4" /></div>
+        <div class="card"><img src="images/logo5.png" alt="Company 5" /></div>
+        <div class="card"><img src="images/logo6.png" alt="Company 6" /></div>
+        <div class="card"><img src="images/logo7.png" alt="Company 7" /></div>
+        <div class="card"><img src="images/logo8.png" alt="Company 8" /></div>
+        <div class="card"><img src="images/logo9.png" alt="Company 9" /></div>
+        <div class="card"><img src="images/logo10.png" alt="Company 10" /></div>
+        <div class="card"><img src="images/logo11.png" alt="Company 11" /></div>
+        <div class="card"><img src="images/logo12.png" alt="Company 12" /></div>
+        <div class="card"><img src="images/logo13.png" alt="Company 13" /></div>
+        <div class="card"><img src="images/logo14.png" alt="Company 14" /></div>
+        <div class="card"><img src="images/logo15.png" alt="Company 15" /></div>
+        <div class="card"><img src="images/logo16.png" alt="Company 16" /></div>
+        <div class="card"><img src="images/logo17.png" alt="Company 17" /></div>
+        <div class="card"><img src="images/logo18.png" alt="Company 18" /></div>
+        <div class="card"><img src="images/logo19.png" alt="Company 19" /></div>
+        <div class="card"><img src="images/logo20.png" alt="Company 20" /></div>
+      </div>
+    </main>
+    <div id="footer"></div>
+
+    <script>
+      // Load header and footer dynamically
+      async function loadLayout() {
+        try {
+          // Load Header
+          const headerRes = await fetch("header.html");
+          const headerHTML = await headerRes.text();
+          console.log("Header HTML:", headerHTML); // log header content
+          document.getElementById("header").innerHTML = headerHTML;
+
+          // Load Footer
+          const footerRes = await fetch("footer.html");
+          const footerHTML = await footerRes.text();
+          console.log("Footer HTML:", footerHTML); // log footer content
+          document.getElementById("footer").innerHTML = footerHTML;
+
+          // Enable mobile menu toggle
+          const menuToggle = document.getElementById("menuToggle");
+          const navMenu = document.querySelector(".nav-menu");
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          // Set Dynamic Year after footer loads
+          const yearSpan = document.getElementById("year");
+          if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+          }
+        } catch (err) {
+          console.error("Error loading layout:", err);
+        }
+      }
+      loadLayout();
+    </script>
+  </body>
+</html>

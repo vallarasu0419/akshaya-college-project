@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>College Placements</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="about.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <main>
+      <h1 class="section-title">Placed Students</h1>
+      <div id="students" class="card-container"></div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <script>
+      // Load header and footer dynamically
+      async function loadLayout() {
+        try {
+          // Load Header
+          const headerRes = await fetch("header.html");
+          const headerHTML = await headerRes.text();
+          console.log("Header HTML:", headerHTML); // log header content
+          document.getElementById("header").innerHTML = headerHTML;
+
+          // Load Footer
+          const footerRes = await fetch("footer.html");
+          const footerHTML = await footerRes.text();
+          console.log("Footer HTML:", footerHTML); // log footer content
+          document.getElementById("footer").innerHTML = footerHTML;
+
+          // Enable mobile menu toggle
+          const menuToggle = document.getElementById("menuToggle");
+          const navMenu = document.querySelector(".nav-menu");
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          // Set Dynamic Year after footer loads
+          const yearSpan = document.getElementById("year");
+          if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+          }
+        } catch (err) {
+          console.error("Error loading layout:", err);
+        }
+      }
+      loadLayout();
+    </script>
+
+    <script>
+      fetch("http://localhost:8080/api/students")
+        .then((res) => res.json())
+        .then((data) => {
+          const container = document.getElementById("students");
+          container.innerHTML = data
+            .map(
+              (student) => `
+        <div class="card" onclick="window.location.href='student.html?id=${student.id}'">
+          <img src="${student.photo}" alt="${student.name}" width="100">
+          <h3>${student.name}</h3>
+        </div>`
+            )
+            .join("");
+        })
+        .catch((err) => console.error("Error fetching students:", err));
+    </script>
+  </body>
+</html>

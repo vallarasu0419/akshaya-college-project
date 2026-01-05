@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Details</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="details" class="student-details"></div>
+
+    <script>
+      // Extract ID from query string (?id=1)
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+
+      if (!id) {
+        document.getElementById("details").innerHTML =
+          "<p style='color:red;'>⚠ No student ID provided.</p>";
+      } else {
+        fetch(`http://localhost:8080/api/students/${id}`)
+          .then((res) => {
+            if (!res.ok) throw new Error("Student not found");
+            return res.json();
+          })
+          .then((student) => {
+            document.getElementById("details").innerHTML = `
+              <img src="${student.photo}" alt="${student.name}" width="150">
+              <h2>${student.name}</h2>
+              
+              <p><strong>Email:</strong> ${student.email}</p>
+              <p><strong>Company:</strong> ${student.company}</p>
+              <p><strong>Role:</strong> ${student.role}</p>
+              <p><strong>Package:</strong> ₹ ${student.ctc} LPA</p>
+              <p><strong>Skills Required:</strong> ${student.skills}</p>
+              <a href="placed.html">⬅ Back</a>
+            `;
+          })
+          .catch((err) => {
+            document.getElementById("details").innerHTML =
+              "<p style='color:red;'>⚠ Error fetching student details.</p>";
+            console.error("Error fetching student:", err);
+          });
+      }
+    </script>
+  </body>
+</html>

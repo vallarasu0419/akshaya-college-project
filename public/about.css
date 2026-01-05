@@ -1,0 +1,74 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.about-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  color: #312e80;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 6px;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  background: orange;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.mission-list li,
+.objectives-list li {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.objectives-list li {
+  display: flex;
+  align-items: center;
+}
+
+.objectives-list i {
+  color: green;
+  margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+}

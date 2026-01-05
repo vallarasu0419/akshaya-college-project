@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Placement Cell</title>
+    <link rel="stylesheet" href="contact.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <main class="contact-container">
+      <h1 class="section-title">Placement Contact</h1>
+      <div class="contact-card">
+        <h2>Dr. Yuvaraj B.E, M.E, PhD</h2>
+        <p><strong>Placement Officer</strong></p>
+        <p>Cell: +91 99655 79666</p>
+        <p>
+          Email:
+          <a href="mailto:placement@excelcolleges.com"
+            >placement@excelcolleges.com</a
+          >
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <h2>Mr. V. Naveenraj DCE, B.E, M.E</h2>
+        <p><strong>Asst. Placement Officer</strong></p>
+        <p>Cell: +91 99429 78555</p>
+        <p>
+          Email:
+          <a href="mailto:naveenraj.placement@excelcolleges.com"
+            >naveenraj.placement@excelcolleges.com</a
+          >
+        </p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <script>
+      // Load header and footer dynamically
+      async function loadLayout() {
+        try {
+          const headerHtml = await fetch("header.html").then((res) =>
+            res.text()
+          );
+          document.getElementById("header").innerHTML = headerHtml;
+
+          const footerHtml = await fetch("footer.html").then((res) =>
+            res.text()
+          );
+          document.getElementById("footer").innerHTML = footerHtml;
+
+          // Mobile menu toggle
+          const menuToggle = document.getElementById("menuToggle");
+          const navMenu = document.querySelector(".nav-menu");
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          // Dynamic Year in footer
+          const yearSpan = document.getElementById("year");
+          if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+        } catch (err) {
+          console.error("Error loading layout:", err);
+        }
+      }
+      loadLayout();
+    </script>
+  </body>
+</html>
